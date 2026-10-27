@@ -1,0 +1,27 @@
+{
+  "name": "salla-custom-code-mcp",
+  "version": "1.0.0",
+  "description": "Local MCP server adding custom CSS/JS tools for a Salla store",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "salla",
+    "css",
+    "javascript"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.6.7"
+  },
+  "bin": {
+    "salla-custom-code-mcp": "server.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

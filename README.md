@@ -81,4 +81,10 @@ SALLA_STORE_ID=... SALLA_VERSION_ID=... node scripts/smoke.mjs
 SALLA_STORE_ID=... SALLA_VERSION_ID=... node scripts/noop-save.mjs
 ```
 
-`scripts/cdp.mjs` أداة تصحيح لمراقبة طلبات اللوحة: `navigate URL` أو `eval JS` أو `watch SECONDS`.
+`scripts/cdp.mjs` أداة تصحيح لمراقبة طلبات اللوحة: `navigate URL` أو `eval JS` أو `watch SECONDS` أو `shot FILE.png`.
+
+`scripts/upload-images.mjs` يرفع صوراً من جهازك إلى منتج، عن طريق جلسة اللوحة نفسها. أول صورة تصبح الصورة الرئيسية، وإذا كان للمنتج صور من قبل، فاستخدم `SORT_OFFSET` حتى تأتي الصور الجديدة بعدها:
+
+```bash
+node scripts/upload-images.mjs <رقم المنتج> "<النص البديل>" main.webp 2.webp 3.webp
+```

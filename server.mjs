@@ -106,6 +106,8 @@ const resolveVersion = v => {
   return id;
 };
 const text = t => ({ content: [{ type: 'text', text: t }] });
+// Salla trims trailing whitespace on save, so only a difference beyond that counts.
+const verdict = (saved, sent) => saved === sent ? 'identical' : saved.trimEnd() === sent.trimEnd() ? 'identical (Salla trimmed trailing whitespace)' : 'DIFFERENT from input';
 
 const server = new McpServer({ name: `salla-custom-code-${PROFILE}`, version: '1.0.0' });
 
@@ -128,7 +130,7 @@ server.registerTool('custom_css_update', {
   const file = backup('css', id, before);
   await dashboardRequest('POST', '/design/custom/css', id, { css });
   const after = (await dashboardRequest('GET', '/design/custom/css', id))?.data?.css ?? '';
-  return text(`Saved custom CSS for version ${id} (${before.length} → ${after.length} chars; verified ${after === css ? 'identical' : 'DIFFERENT from input'}). Backup of previous CSS: ${file}`);
+  return text(`Saved custom CSS for version ${id} (${before.length} → ${after.length} chars; verified ${verdict(after, css)}). Backup of previous CSS: ${file}`);
 });
 
 server.registerTool('custom_js_get', {
@@ -151,7 +153,7 @@ server.registerTool('custom_js_update', {
   const file = backup('js', id, before);
   await dashboardRequest('POST', '/design/custom/js', id, { js });
   const after = (await dashboardRequest('GET', '/design/custom/js', id))?.data?.js ?? '';
-  return text(`Saved custom JS for version ${id} (${before.length} → ${after.length} chars; verified ${after === js ? 'identical' : 'DIFFERENT from input'}). Backup of previous JS: ${file}`);
+  return text(`Saved custom JS for version ${id} (${before.length} → ${after.length} chars; verified ${verdict(after, js)}). Backup of previous JS: ${file}`);
 });
 
 server.registerTool('custom_js_toggle', {

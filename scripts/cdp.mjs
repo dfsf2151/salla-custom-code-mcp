@@ -22,4 +22,5 @@ const wait = s => new Promise(r => setTimeout(r, s * 1000));
 if (cmd === 'navigate') { await send('Page.navigate', { url: arg }); await wait(Number(process.env.WAIT || 12)); }
 else if (cmd === 'eval') { const res = await send('Runtime.evaluate', { expression: arg, awaitPromise: true, returnByValue: true }); console.log(JSON.stringify(res.result?.result?.value ?? res.result, null, 1)); }
 else if (cmd === 'watch') await wait(Number(arg || 15));
+else if (cmd === 'shot') { const res = await send('Page.captureScreenshot', { format: 'png' }); (await import('node:fs')).writeFileSync(arg, Buffer.from(res.result.data, 'base64')); console.log('saved', arg); }
 ws.close(); process.exit(0);

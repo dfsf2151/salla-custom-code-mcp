@@ -35,7 +35,7 @@
 ## التثبيت
 
 ```bash
-git clone https://github.com/mohamad-almasri-2008/salla-custom-code-mcp.git
+git clone https://github.com/dfsf2151/salla-custom-code-mcp.git
 cd salla-custom-code-mcp
 npm install
 ```
